@@ -1,5 +1,7 @@
 <template>
-  <BaseListWrapper list="Absensi">
+  <BaseListWrapper
+    list="Absensi"
+  >
     <template #table>
       <div class="card-body">
         <div class="tab-content">
@@ -45,7 +47,8 @@
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>
 
 <style>

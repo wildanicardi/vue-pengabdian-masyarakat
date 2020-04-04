@@ -28,7 +28,12 @@ const routes = [{
     component: () => import('../views/Matapelajaran.vue'),
     props: true
   },
-
+  {
+    path: '/jam-pelajaran',
+    name: 'Jampelajaran',
+    component: () => import('../views/Jampelajaran.vue'),
+    props: true
+  }
 ]
 
 const router = new VueRouter({

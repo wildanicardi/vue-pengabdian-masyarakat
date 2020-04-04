@@ -8,7 +8,16 @@ import camelCase from "lodash/camelCase";
 import './assets/css/material-dashboard.min.css';
 import './assets/css/material-dashboard.css';
 import './assets/css/demo.css';
+import {
+  MdDialog,
+  MdButton,
+  MdTabs
+} from 'vue-material/dist/components';
+import 'vue-material/dist/vue-material.min.css';
 
+Vue.use(MdDialog);
+Vue.use(MdButton);
+Vue.use(MdTabs);
 Vue.config.productionTip = false;
 const requireComponent = require.context(
   // The relative path of the components folder

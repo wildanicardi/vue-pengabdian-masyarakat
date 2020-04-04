@@ -60,6 +60,17 @@
               <p>Mata Pelajaran</p>
             </router-link>
           </li>
+          <li
+            :class="[
+              currentPage.includes('Jampelajaran') ? activeClass : '',
+              'nav-item'
+            ]"
+          >
+            <router-link :to="{ name: 'Jampelajaran' }" class="nav-link">
+              <i class="material-icons">alarm</i>
+              <p>Jam Pelajaran</p>
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>

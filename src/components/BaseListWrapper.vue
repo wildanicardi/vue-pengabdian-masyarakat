@@ -14,8 +14,7 @@
                 <button
                   type="submit"
                   class="btn btn-primary pull-right"
-                  data-toggle="modal"
-                  data-target="#myModal"
+                  @click="$emit('action')"
                   style="background-color:rgb(226, 110, 110);"
                 >
                   Tambah Data
@@ -23,6 +22,7 @@
               </div>
             </div>
             <slot name="table" />
+            <slot name="modal" />
           </div>
         </div>
       </div>

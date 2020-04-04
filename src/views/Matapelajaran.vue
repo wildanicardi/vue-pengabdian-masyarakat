@@ -1,5 +1,8 @@
 <template>
-  <BaseListWrapper list="Mata Pelajaran">
+  <BaseListWrapper
+    list="Mata Pelajaran"
+    @action="isCreateDialogDisplay = !isCreateDialogDisplay"
+  >
     <template #table>
       <div class="card-body">
         <div class="tab-content">
@@ -13,7 +16,9 @@
                       <th data-breakpoints="xs sm" class="text-center">
                         Jam Pelajaran
                       </th>
-                      <th data-breakpoints="xs sm" class="text-center">Aksi</th>
+                      <th data-breakpoints="xs sm" class="text-center">
+                        Aksi
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="table-list-items">
@@ -37,11 +42,62 @@
         </div>
       </div>
     </template>
+    <template #modal>
+      <BaseDialog :show-dialog="isCreateDialogDisplay">
+        <template #form>
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Mata Pelajaran</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <select class="form-control" id="sel1">
+                    <option>Pilih Jam Pelajaran :</option>
+                    <option>Laki-Laki</option>
+                    <option>Perempuan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 20px;">
+              <button
+                type="button"
+                class="btn btn-default"
+                @click="isCreateDialogDisplay = false"
+                style="background-color:red; margin-bottom: -20px;"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+                style="background-color:#2C4F81; margin-bottom: -20px;"
+              >
+                Tambah Data
+              </button>
+            </div>
+          </form>
+        </template>
+      </BaseDialog>
+    </template>
   </BaseListWrapper>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isCreateDialogDisplay: false
+    };
+  }
+};
 </script>
 
 <style>
