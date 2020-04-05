@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <nav
       class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top"
     >
@@ -21,46 +21,27 @@
           <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
-          <form class="navbar-form">
-            <div class="input-group no-border">
-              <input
-                type="text"
-                value
-                class="form-control"
-                placeholder="Search..."
-              />
-              <button
-                type="submit"
-                class="btn btn-white btn-round btn-just-icon"
-              >
-                <i class="material-icons">search</i>
-                <div class="ripple-container"></div>
-              </button>
-            </div>
-          </form>
           <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                href="javascript:;"
-                id="navbarDropdownProfile"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="material-icons">person</i>
-                <p class="d-lg-none d-md-block">Account</p>
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="navbarDropdownProfile"
-              >
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Log out</a>
-              </div>
-            </li>
+            <a
+              class="nav-link float-left"
+              href="javascript:;"
+              id="navbarDropdownProfile"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="material-icons">person</i>
+            </a>
+            <button
+              type="submit"
+              class="btn pull-right"
+              style="background-color: rgb(226, 110, 110);"
+            >
+              <span class="material-icons">
+                power_settings_new
+              </span>
+              Logout
+            </button>
           </ul>
         </div>
       </div>
@@ -71,10 +52,9 @@
 <script>
 export default {
   props: {
-    name: String
-  }
+    name: String,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

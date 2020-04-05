@@ -15,7 +15,8 @@
                   type="submit"
                   class="btn btn-primary pull-right"
                   @click="$emit('action')"
-                  style="background-color:rgb(226, 110, 110);"
+                  style="background-color: rgb(226, 110, 110);"
+                  v-if="this.$route.name !== 'Absensi'"
                 >
                   Tambah Data
                 </button>
@@ -33,10 +34,9 @@
 <script>
 export default {
   props: {
-    list: String
-  }
+    list: String,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

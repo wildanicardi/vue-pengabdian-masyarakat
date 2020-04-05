@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Sidebar />
-    <div class="main-panel">
-      <Navbar />
+    <Sidebar v-if="this.$route.name !== 'Login'" />
+    <div class="main-panel" >
+      <Navbar v-if="this.$route.name !== 'Login'" />
       <router-view />
     </div>
   </div>

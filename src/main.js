@@ -8,6 +8,7 @@ import camelCase from "lodash/camelCase";
 import './assets/css/material-dashboard.min.css';
 import './assets/css/material-dashboard.css';
 import './assets/css/demo.css';
+import "nprogress/nprogress.css";
 import {
   MdDialog,
   MdButton,
