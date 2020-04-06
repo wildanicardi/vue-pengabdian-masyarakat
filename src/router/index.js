@@ -1,21 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
+import auth from '../middleware/auth';
+import nonAuth from '../middleware/non-auth';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Dashboard",
     component: Dashboard,
     props: true,
+    meta: {
+      middleware: nonAuth
+    }
   },
   {
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
     props: true,
+    meta: {
+      middleware: auth
+    }
   },
   {
     path: "/guru",

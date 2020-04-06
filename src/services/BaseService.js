@@ -1,33 +1,33 @@
 import axios from 'axios';
 import NProgress from "nprogress";
+// import AuthService from './AuthService';
 class BaseService {
   constructor() {
     this.endPoint = '';
     this.setBaseUrl();
   }
   setBaseUrl() {
-    const apiClient = axios.create({
-      baseURL: process.env.API_URL
+    this.apiClient = axios.create({
+      baseURL: 'http://127.0.0.1:8000/api'
     });
-    apiClient.interceptors.response.use((response) => {
+    this.apiClient.interceptors.response.use((response) => {
       NProgress.start();
       return response
     }, (err) => {
-      if (err.response.status === 401) {
-
-      }
+      // if (err.response.status === 401) {
+      //   AuthService.logOut();
+      // }
       return Promise.reject(err);
     });
-    apiClient.interceptors.response.use(config => {
+    this.apiClient.interceptors.response.use((response) => {
       NProgress.done();
-      return config;
-    })
+      return response
+    });
   }
   includeDefault(options) {
     let access_token = window.localStorage.getItem('access_token') ? window.localStorage.getItem('access_token') : null;
     const headers = {
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`
       },
@@ -38,25 +38,29 @@ class BaseService {
   // method
   get(options = {}) {
     const opts = this.includeDefault(options);
-    return apiClient.get(this.endPoint, opts);
+    return this.apiClient.get(this.endPoint, opts);
   }
 
   post(data, options = {}) {
     const opts = this.includeDefault(options);
-    return apiClient.post(this.endPoint, data, opts);
+    return this.apiClient.post(this.endPoint, data, opts);
   }
   put(data, options = {}) {
     const opts = this.includeDefault(options);
-    return apiClient.put(this.endPoint, data, opts)
+    return this.apiClient.put(this.endPoint, data, opts)
   }
   putOne(id, options = {}) {
     const opts = this.includeDefault(options);
-    return apiClient.put(this.endPoint + '/' + id, opts);
+    return this.apiClient.put(this.endPoint + '/' + id, opts);
   }
   delete(id, options = {}) {
     const opts = this.includeDefault(options);
-    return apiClient.delete(this.endPoint + '/' + id, opts);
+    return this.apiClient.delete(this.endPoint + '/' + id, opts);
   }
+  // postLogin(data) 
+
+  //   return this.apiClient.post(this.endPoint, data);
+  // }
 }
 
 export default BaseService;

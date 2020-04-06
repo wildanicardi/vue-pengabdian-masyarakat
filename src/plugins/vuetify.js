@@ -1,7 +1,11 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+// src/plugins/vuetify.js
 
-Vue.use(Vuetify);
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
-export default new Vuetify({
-});
+Vue.use(Vuetify)
+
+const opts = {}
+
+export default new Vuetify(opts)

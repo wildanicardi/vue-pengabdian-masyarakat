@@ -1,13 +1,14 @@
 import BaseService from './BaseService';
 import router from '../router/index';
 
+
 class AuthService extends BaseService {
   async getDataUser(opts = {}) {
-    this.endPoint = '/me';
+    this.endPoint = '/auth/me';
     return this.get(opts);
   }
   login(email, password) {
-    this.endPoint = '/login';
+    this.endPoint = '/auth/login';
     const user = {
       email: email,
       password: password
@@ -24,3 +25,5 @@ class AuthService extends BaseService {
     router.push('/login');
   }
 }
+
+export default new AuthService();

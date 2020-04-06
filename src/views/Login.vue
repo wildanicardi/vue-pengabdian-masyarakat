@@ -6,12 +6,17 @@
           <span>Form Login</span>
         </div>
         <div class="card-body">
-          <form>
+          <v-form ref="form" @submit="onLogin" v-model="valid">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Email</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    v-model="login.email"
+                    class="form-control"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -19,19 +24,26 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Password</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="password"
+                    v-model="login.password"
+                    class="form-control"
+                    required
+                  />
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button
                 type="button"
+                :disabled="!valid"
+                @click="onLogin"
                 class="btn btn-primary"
               >
                 Login
               </button>
             </div>
-          </form>
+          </v-form>
         </div>
       </div>
     </div>
@@ -39,7 +51,38 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      valid: true,
+      login: {
+        email: null,
+        password: null
+      }
+    };
+  },
+  methods: {
+    ...mapActions({
+      logIn: "auth/logIn"
+    }),
+    async onLogin() {
+      if (this.$refs.form.validate()) {
+        try {
+          const response = await this.logIn(this.login);
+          console.log(response);
+          if (!response.data.success) {
+            console.log(response.data.message);
+          } else {
+            this.$router.push({ name: "Dashboard" });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>

@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+import vuetify from '@/plugins/vuetify'
 import './assets/css/material-dashboard.min.css';
 import './assets/css/material-dashboard.css';
 import './assets/css/demo.css';
@@ -56,5 +57,6 @@ requireComponent.keys().forEach((fileName) => {
 new Vue({
   router,
   store,
+  vuetify,
   render: (h) => h(App),
 }).$mount("#app");

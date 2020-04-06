@@ -34,8 +34,8 @@
 <script>
 export default {
   props: {
-    list: String,
-  },
+    list: String
+  }
 };
 </script>
 
