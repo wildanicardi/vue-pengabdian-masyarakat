@@ -48,6 +48,12 @@ const routes = [{
     component: () => import("../views/Jampelajaran.vue"),
     props: true,
   },
+  {
+    path: "/kelas",
+    name: "Kelas",
+    component: () => import("../views/Kelas.vue"),
+    props: true,
+  }
 ];
 
 const router = new VueRouter({
