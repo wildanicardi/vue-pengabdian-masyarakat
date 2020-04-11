@@ -19,14 +19,19 @@
                       <th data-breakpoints="xs sm" class="text-center">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody id="table-list-items">
+                  <tbody
+                    id="table-list-items"
+                    v-for="item in classes.data"
+                    :key="item.id"
+                    :item="item"
+                  >
                     <tr>
                       <td>
                         <div class="media-body media-middle">
-                          Teknik Komputer Dan Jaringan
+                          {{ item.jurusan }}
                         </div>
                       </td>
-                      <td class="text-center">XI</td>
+                      <td class="text-center">{{ item.tingkatan_kelas }}</td>
                       <td class="text-center">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -86,12 +91,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       isCreateDialogDisplay: false
     };
-  }
+  },
+  created() {
+    this.getClass();
+  },
+  computed: mapState("classes", ["classes"]),
+  methods: mapActions("classes", ["getClass"])
 };
 </script>
 

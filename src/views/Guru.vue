@@ -63,13 +63,21 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="bmd-label-floating">Nama</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="teacher.nama"
+                  />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="bmd-label-floating">Email</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="teacher.email"
+                  />
                 </div>
               </div>
             </div>
@@ -77,7 +85,11 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Alamat</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="teacher.alamat"
+                  />
                 </div>
               </div>
             </div>
@@ -85,7 +97,11 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Password</label>
-                  <input type="password" class="form-control" />
+                  <input
+                    type="password"
+                    class="form-control"
+                    v-model="teacher.password"
+                  />
                 </div>
               </div>
             </div>
@@ -93,13 +109,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="bmd-label-floating">Telp</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="teacher.telp"
+                  />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="bmd-label-floating">NIP</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="teacher.nomer_pengajar"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -115,7 +140,7 @@
               <button
                 type="button"
                 class="btn btn-default"
-                data-dismiss="modal"
+                @click="storeTeacher"
                 style="background-color:#2C4F81; margin-bottom: -20px;"
               >
                 Tambah Data
@@ -134,14 +159,49 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false
+      isCreateDialogDisplay: false,
+      teacher: {
+        nama: null,
+        alamat: null,
+        email: null,
+        telp: null,
+        password: null,
+        nomer_pengajar: null,
+        role_id: 2
+      }
     };
   },
   created() {
     this.getTeachers();
   },
   computed: mapState("teacher", ["teachers"]),
-  methods: mapActions("teacher", ["getTeachers"])
+  methods: {
+    ...mapActions("teacher", ["getTeachers", "createTeacher"]),
+    async storeTeacher() {
+      try {
+        this.isCreateDialogDisplay = true;
+        const result = await this.createTeacher(this.teacher);
+        if (!result) {
+          console.log(result);
+        } else {
+          this.teacher = this.freshObject();
+          this.isCreateDialogDisplay = false;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    freshObject() {
+      return {
+        nama: "",
+        alamat: "",
+        email: "",
+        telp: "",
+        password: "",
+        nomer_pengajar: ""
+      };
+    }
+  }
 };
 </script>
 
