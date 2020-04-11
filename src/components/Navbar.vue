@@ -33,6 +33,7 @@
               <i class="material-icons">person</i>
             </a>
             <button
+              @click="onLogout"
               type="submit"
               class="btn pull-right"
               style="background-color: rgb(226, 110, 110);"
@@ -50,10 +51,18 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
-    name: String,
+    name: String
   },
+  computed: mapState(["token"]),
+  methods: {
+    onLogout() {
+      this.$store.dispatch("auth/logOut");
+      this.$router.replace({ name: "Login" });
+    }
+  }
 };
 </script>
 

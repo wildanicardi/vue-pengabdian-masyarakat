@@ -21,7 +21,6 @@ export const actions = {
       password
     } = payload;
     const response = await AuthService.login(email, password);
-    console.log(response);
     if (!response.data.success) {
       return response;
     }
@@ -32,6 +31,7 @@ export const actions = {
   async logOut({
     state
   }) {
+    window.localStorage.removeItem('access_token');
     state.token = null;
     await AuthService.logOut();
   }

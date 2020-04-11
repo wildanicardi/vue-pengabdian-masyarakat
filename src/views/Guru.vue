@@ -26,17 +26,22 @@
                       <th data-breakpoints="xs sm" class="text-center">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody id="table-list-items">
+                  <tbody
+                    id="table-list-items"
+                    v-for="teacher in teachers.data"
+                    :key="teacher.id"
+                    :teacher="teacher"
+                  >
                     <tr>
                       <td>
                         <div class="media-body media-middle">
-                          Muhammdad ALi
+                          {{ teacher.nama }}
                         </div>
                       </td>
-                      <td class="text-center">19298937492842830</td>
-                      <td class="text-center">Surabaya</td>
-                      <td class="text-center">apaya@gmail.com</td>
-                      <td class="text-center">234567890297</td>
+                      <td class="text-center">{{ teacher.nomer_pengajar }}</td>
+                      <td class="text-center">{{ teacher.alamat }}</td>
+                      <td class="text-center">{{ teacher.email }}</td>
+                      <td class="text-center">{{ teacher.telp }}</td>
                       <td class="text-center">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -124,14 +129,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false,
-      guru:[],
+      isCreateDialogDisplay: false
     };
   },
-  
+  created() {
+    this.getTeachers();
+  },
+  computed: mapState("teacher", ["teachers"]),
+  methods: mapActions("teacher", ["getTeachers"])
 };
 </script>
 
