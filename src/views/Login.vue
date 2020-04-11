@@ -70,7 +70,6 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           const response = await this.logIn(this.login);
-          console.log(response);
           if (!response.data.success) {
             console.log(response.data.message);
           } else {

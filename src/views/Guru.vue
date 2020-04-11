@@ -127,9 +127,11 @@
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false
+      isCreateDialogDisplay: false,
+      guru:[],
     };
-  }
+  },
+  
 };
 </script>
 

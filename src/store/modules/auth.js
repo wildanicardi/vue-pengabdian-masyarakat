@@ -21,12 +21,12 @@ export const actions = {
       password
     } = payload;
     const response = await AuthService.login(email, password);
-
+    console.log(response);
     if (!response.data.success) {
       return response;
     }
-    window.localStorage.setItem('access_token', response.data.access_token);
     commit(types.SET_TOKEN, response.data.access_token);
+    window.localStorage.setItem('access_token', response.data.access_token);
     return response;
   },
   async logOut({
