@@ -21,7 +21,7 @@
                   </thead>
                   <tbody
                     id="table-list-items"
-                    v-for="item in classes.data"
+                    v-for="item in classes"
                     :key="item.id"
                     :item="item"
                   >
@@ -53,7 +53,12 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Jurusan</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="data.jurusan"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -61,7 +66,12 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Kelas</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="data.tingkatan_kelas"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -77,7 +87,7 @@
               <button
                 type="button"
                 class="btn btn-default"
-                data-dismiss="modal"
+                @click="storeClasses"
                 style="background-color:#2C4F81; margin-bottom: -20px;"
               >
                 Tambah Data
@@ -91,20 +101,37 @@
 </template>
 
 <script>
+import NProgress from "nprogress";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false
+      isCreateDialogDisplay: false,
+      data: {
+        jurusan: null,
+        tingkatan_kelas: null
+      }
     };
   },
   created() {
     this.getClass();
   },
   computed: mapState("classes", ["classes"]),
-  methods: mapActions("classes", ["getClass"])
+  methods: {
+    ...mapActions("classes", ["getClass", "creatClass"]),
+    async storeClasses() {
+      try {
+        this.isCreateDialogDisplay = true;
+        NProgress.start();
+        await this.creatClass(this.data);
+        this.isCreateDialogDisplay = false;
+      } catch (error) {
+        NProgress.done();
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

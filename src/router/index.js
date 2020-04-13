@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
 import auth from '../middleware/auth';
 import nonAuth from '../middleware/nonAuth';
+import NProgress from "nprogress";
 
 Vue.use(VueRouter);
 
@@ -99,6 +100,7 @@ function nextFactory(context, middleware, index) {
   }
 }
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   if (to.meta.middleware) {
     const middleware = Array.isArray(to.meta.middleware) ? to.meta.middleware : [to.meta.middleware];
     const context = {
@@ -114,5 +116,8 @@ router.beforeEach((to, from, next) => {
     });
   }
   return next();
-})
+});
+router.afterEach(() => {
+  NProgress.done();
+});
 export default router;

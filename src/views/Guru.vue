@@ -28,7 +28,7 @@
                   </thead>
                   <tbody
                     id="table-list-items"
-                    v-for="teacher in teachers.data"
+                    v-for="teacher in teachers"
                     :key="teacher.id"
                     :teacher="teacher"
                   >
@@ -180,13 +180,8 @@ export default {
     async storeTeacher() {
       try {
         this.isCreateDialogDisplay = true;
-        const result = await this.createTeacher(this.teacher);
-        if (!result) {
-          console.log(result);
-        } else {
-          this.teacher = this.freshObject();
-          this.isCreateDialogDisplay = false;
-        }
+        await this.createTeacher(this.teacher);
+        this.isCreateDialogDisplay = false;
       } catch (error) {
         console.log(error);
       }
