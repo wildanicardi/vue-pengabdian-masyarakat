@@ -61,19 +61,39 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Hari</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="data.hari"
+                    required
+                  />
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select class="form-control" id="sel1">
-                    <option>Pilih Jam Pelajaran :</option>
-                    <option>Laki-Laki</option>
-                    <option>Perempuan</option>
-                  </select>
+                  <label class="bmd-label-floating">Mulai</label>
+                  <v-time-picker
+                    v-model="data.mulai"
+                    :allowed-minutes="allowedMinutes"
+                    :use-seconds="true"
+                    class="mt-4 time"
+                    format="24hr"
+                  ></v-time-picker>
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="bmd-label-floating">Selesai</label>
+                <v-time-picker
+                  v-model="data.selesai"
+                  :allowed-minutes="allowedMinutes"
+                  :use-seconds="useSeconds"
+                  class="mt-4 time"
+                  format="24hr"
+                ></v-time-picker>
               </div>
             </div>
             <div class="modal-footer" style="margin-top: 20px;">
@@ -88,7 +108,7 @@
               <button
                 type="button"
                 class="btn btn-default"
-                data-dismiss="modal"
+                @click="storePelajaran"
                 style="background-color:#2C4F81; margin-bottom: -20px;"
               >
                 Tambah Data
@@ -102,11 +122,14 @@
 </template>
 
 <script>
+import NProgress from "nprogress";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       isCreateDialogDisplay: false,
+      useSeconds: true,
+      timeStep: "10:10",
       data: {
         hari: null,
         mulai: null,
@@ -119,10 +142,27 @@ export default {
   },
   computed: mapState("time", ["times"]),
   methods: {
-    ...mapActions("time", ["getTimes", "createTimes"])
+    ...mapActions("time", ["getTimes", "createTimes"]),
+    allowedHours: v => v % 2,
+    allowedMinutes: v => v >= 0 && v <= 60,
+    allowedStep: m => m % 10 === 0,
+    async storePelajaran() {
+      try {
+        this.isCreateDialogDisplay = true;
+        NProgress.start();
+        await this.createTimes(this.data);
+        this.isCreateDialogDisplay = false;
+        NProgress.done();
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.time {
+  background-color: #2545c0;
+}
 </style>
