@@ -14,21 +14,22 @@
                     <tr>
                       <th data-type="html">Mata Pelajaran</th>
                       <th data-breakpoints="xs sm" class="text-center">
-                        Jam Pelajaran
-                      </th>
-                      <th data-breakpoints="xs sm" class="text-center">
                         Aksi
                       </th>
                     </tr>
                   </thead>
-                  <tbody id="table-list-items">
+                  <tbody
+                    id="table-list-items"
+                    v-for="item in lessons"
+                    :key="item.id"
+                    :item="item"
+                  >
                     <tr>
                       <td>
                         <div class="media-body media-middle">
-                          IPA
+                          {{ item.nama_pelajaran }}
                         </div>
                       </td>
-                      <td class="text-center">06:00 - 08:00</td>
                       <td class="text-center">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -50,18 +51,12 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Mata Pelajaran</label>
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <select class="form-control" id="sel1">
-                    <option>Pilih Jam Pelajaran :</option>
-                    <option>Laki-Laki</option>
-                    <option>Perempuan</option>
-                  </select>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="data.nama_pelajaran"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -77,7 +72,7 @@
               <button
                 type="button"
                 class="btn btn-default"
-                data-dismiss="modal"
+                @click="storeLessons"
                 style="background-color:#2C4F81; margin-bottom: -20px;"
               >
                 Tambah Data
@@ -91,11 +86,34 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import NProgress from "nprogress";
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false
+      isCreateDialogDisplay: false,
+      data: {
+        nama_pelajaran: null
+      }
     };
+  },
+  created() {
+    this.getLessons();
+  },
+  computed: mapState("lessons", ["lessons"]),
+  methods: {
+    ...mapActions("lessons", ["getLessons", "createLessons"]),
+    async storeLessons() {
+      try {
+        this.isCreateDialogDisplay = true;
+        NProgress.start();
+        await this.createLessons(this.data);
+        this.isCreateDialogDisplay = false;
+        NProgress.done();
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 </script>

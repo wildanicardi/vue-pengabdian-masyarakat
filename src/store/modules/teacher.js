@@ -24,9 +24,9 @@ export const actions = {
       console.log(error);
     }
   },
-  async createTeacher({ commit }, payload) {
+  async createUserData({ commit }, payload) {
     try {
-      const { data } = await GuruService.createGuru(payload);
+      const { data } = await GuruService.createUser(payload);
       commit(types.ADD_TEACHER, data.data);
     } catch (error) {
       console.log(error);

@@ -6,6 +6,10 @@ class GuruService extends BaseService {
     return await this.get(opts);
   }
   async createGuru(payload) {
+    this.endPoint = '/guru';
+    return await this.post(payload);
+  }
+  async createUser(payload) {
     this.endPoint = '/users';
     return await this.post(payload);
   }
