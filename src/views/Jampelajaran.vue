@@ -16,21 +16,30 @@
                         Hari
                       </th>
                       <th data-breakpoints="xs sm" class="text-center">
-                        Jam Pelajaran
+                        Mulai Jam Pelajaran
+                      </th>
+                      <th data-breakpoints="xs sm" class="text-center">
+                        Selesai Jam Pelajaran
                       </th>
                       <th data-breakpoints="xs sm" class="text-center">
                         Aksi
                       </th>
                     </tr>
                   </thead>
-                  <tbody id="table-list-items">
+                  <tbody
+                    id="table-list-items"
+                    v-for="time in times"
+                    :key="time.id"
+                    :time="time"
+                  >
                     <tr>
                       <td>
                         <div class="media-body media-middle">
-                          Senin
+                          {{ time.hari }}
                         </div>
                       </td>
-                      <td class="text-center">06:00 - 08:00</td>
+                      <td class="text-center">{{ time.mulai }}</td>
+                      <td class="text-center">{{ time.selesai }}</td>
                       <td class="text-center">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -93,11 +102,24 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      isCreateDialogDisplay: false
+      isCreateDialogDisplay: false,
+      data: {
+        hari: null,
+        mulai: null,
+        selesai: null
+      }
     };
+  },
+  created() {
+    this.getTimes();
+  },
+  computed: mapState("time", ["times"]),
+  methods: {
+    ...mapActions("time", ["getTimes", "createTimes"])
   }
 };
 </script>
