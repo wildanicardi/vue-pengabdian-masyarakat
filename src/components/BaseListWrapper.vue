@@ -16,7 +16,6 @@
                   class="btn btn-primary pull-right"
                   @click="$emit('action')"
                   style="background-color: rgb(226, 110, 110);"
-                  v-if="this.$route.name !== 'Absensi'"
                 >
                   Tambah Data
                 </button>

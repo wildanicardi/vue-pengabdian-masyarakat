@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <v-app>
+    <div>
     <Sidebar v-if="this.$route.name !== 'Login'" />
-    <div class="main-panel" >
+    <div class="main-panel">
       <Navbar v-if="this.$route.name !== 'Login'" />
       <router-view />
     </div>
-  </div>
+    </div>
+  </v-app>
 </template>
 <script>
 import Navbar from "@/components/Navbar";

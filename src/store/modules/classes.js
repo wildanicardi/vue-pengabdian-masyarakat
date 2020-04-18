@@ -17,17 +17,25 @@ export const mutations = {
   }
 };
 export const actions = {
-  async getClass({ commit }) {
+  async getClass({
+    commit
+  }) {
     try {
-      const { data } = await KelasService.getDataKelas();
+      const {
+        data
+      } = await KelasService.getDataKelas();
       commit(types.SET_CLASSES, data.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   },
-  async creatClass({ commit }, payload) {
+  async creatClass({
+    commit
+  }, payload) {
     try {
-      const { data } = await KelasService.postDataKelas(payload);
+      const {
+        data
+      } = await KelasService.postDataKelas(payload);
       commit(types.ADD_CLASSES, data.data);
     } catch (error) {
       console.log(error);

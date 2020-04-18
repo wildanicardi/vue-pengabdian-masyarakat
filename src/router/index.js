@@ -35,9 +35,9 @@ const routes = [{
     }
   },
   {
-    path: "/absensi",
-    name: "Absensi",
-    component: () => import("../views/Absensi.vue"),
+    path: "/jadwal-pelajaran",
+    name: "Jadwal",
+    component: () => import("../views/JadwalPelajaran.vue"),
     props: true,
     meta: {
       middleware: nonAuth

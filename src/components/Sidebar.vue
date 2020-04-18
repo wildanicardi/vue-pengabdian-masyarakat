@@ -35,13 +35,13 @@
           </li>
           <li
             :class="[
-              currentPage.includes('Absensi') ? activeClass : '',
+              currentPage.includes('Jadwal') ? activeClass : '',
               'nav-item'
             ]"
           >
-            <router-link :to="{ name: 'Absensi' }" class="nav-link">
+            <router-link :to="{ name: 'Jadwal' }" class="nav-link">
               <i class="material-icons">content_paste</i>
-              <p>Absensi Guru</p>
+              <p>Jadwal Pelajaran</p>
             </router-link>
           </li>
           <li

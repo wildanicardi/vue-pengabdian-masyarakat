@@ -30,8 +30,7 @@ class BaseService {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`
-      },
-      timeout: 1000
+      }
     };
     return Object.assign(headers, options);
   }

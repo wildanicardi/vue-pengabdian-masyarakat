@@ -10,7 +10,9 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Email</label>
+                  <label class="bmd-label-floating" style="float:left;"
+                    >Email</label
+                  >
                   <input
                     type="text"
                     v-model="login.email"
@@ -23,7 +25,9 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Password</label>
+                  <label class="bmd-label-floating" style="float:left;"
+                    >Password</label
+                  >
                   <input
                     type="password"
                     v-model="login.password"
